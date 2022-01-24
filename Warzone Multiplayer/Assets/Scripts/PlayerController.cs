@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     Rigidbody rb;
     PhotonView PV;
 
+    private Animator anim;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         Cursor.visible = false;
         if (PV.IsMine)
         {
+            anim = GetComponent<Animator>();
             EquipItem(0);
         } else
         {
@@ -52,6 +55,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         Look();
         Move();
+        Animate();
         Jump();
 
         for (int i = 0; i < items.Length; i++)
@@ -83,6 +87,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 EquipItem(itemIndex - 1);
             }
         }
+
     }
 
     void Look()
@@ -90,7 +95,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * mouseSensitivity);
 
         verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -71f, 90f);
 
         cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
     }
@@ -100,6 +105,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
+
     }
 
     void Jump()
@@ -132,6 +138,54 @@ public class PlayerController : MonoBehaviourPunCallbacks
             Hashtable hash = new Hashtable();
             hash.Add("itemIndex", itemIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
+    }
+
+    void Animate()
+    {
+        if (Input.GetKey(KeyCode.A) && grounded)
+        {
+            anim.SetFloat("Move", 0.5f);
+        }
+        else if (Input.GetKeyUp(KeyCode.A))
+        {
+            anim.SetFloat("Move", 0f);
+        }
+
+        if (Input.GetKey(KeyCode.D) && grounded)
+        {
+            anim.SetFloat("Move", 0.5f);
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            anim.SetFloat("Move", 0f);
+        }
+
+        if (Input.GetKey(KeyCode.S) && grounded)
+        {
+            anim.SetFloat("Move", 0.5f);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            anim.SetFloat("Move", 0f);
+        }
+
+        if (Input.GetKey(KeyCode.W) && grounded)
+        {
+            anim.SetFloat("Move", 0.5f);
+        }
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            anim.SetFloat("Move", 0f);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && grounded)
+        {
+            anim.SetFloat("Move", 1f);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            anim.SetFloat("Move", 0f);
         }
     }
 
