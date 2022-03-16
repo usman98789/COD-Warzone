@@ -50,6 +50,7 @@ MonoBehaviour:
   - RPC_CurrentCash
   - RPC_HeldArmor
   - RPC_HasOpened
+  - RPC_TakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

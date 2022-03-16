@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
     [SerializeField] GameObject cameraHolder;
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
@@ -26,10 +26,27 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private Animator anim;
 
+    PlayerManager playerManager;
+
+    [SerializeField] WeaponBob weaponBobScript;
+
+    [SerializeField] Animator smgAnimator;
+    [SerializeField] Animator pistolAnimator;
+    [SerializeField] Animator shotgunAnimator;
+    [SerializeField] Animator sniperAnimator;
+    [SerializeField] Animator arAnimator;
+    [SerializeField] Animator macAnimator;
+    private Animator curr;
+
+    private bool isAiming = false;
+    private Animator[] allAnimators = new Animator[] {};
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         PV = GetComponent<PhotonView>();
+
+        playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
     }
 
     private void Start()
@@ -46,6 +63,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
             Destroy(rb);
         }
 
+        allAnimators = new Animator[] { smgAnimator, pistolAnimator, shotgunAnimator, sniperAnimator, arAnimator, macAnimator };
+        disableAnimator();
+        curr = allAnimators[0];
     }
 
     private void Update()
@@ -71,9 +91,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             if (itemIndex >= items.Length - 1)
             {
+                curr = allAnimators[0];
                 EquipItem(0);
             } else
             {
+                curr = allAnimators[itemIndex + 1];
                 EquipItem(itemIndex + 1);
             }
         }
@@ -81,13 +103,80 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             if (itemIndex <= 0)
             {
+                curr = allAnimators[items.Length - 1];
                 EquipItem(items.Length - 1);
             } else
             {
+                curr = allAnimators[itemIndex - 1];
                 EquipItem(itemIndex - 1);
             }
         }
 
+        if (Input.GetMouseButton(0))
+        {
+            items[itemIndex].Use();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            isAiming = true;
+            SetAnimator();
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            isAiming = false;
+            SetAnimator();
+        }
+
+        if (!isAiming)
+        {
+            weaponBobScript.enabled = true;
+            weaponBobScript.currentSpeed = AllowWeaponBob() ? (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed) : 0;
+        } else
+        {
+
+            weaponBobScript.enabled = false;
+        }
+
+    }
+
+    void disableAnimator()
+    {
+        for (int i = 0; i < allAnimators.Length; i++)
+        {
+            allAnimators[i].enabled = false;
+        }
+    }
+
+    Animator getCurrentAnimator()
+    {
+        var res = new Animator();
+        for(int i =0; i < allAnimators.Length; i++)
+        {
+            if (allAnimators[i].gameObject.activeInHierarchy)
+            {
+                Debug.Log("FOUND IT: " + allAnimators[i].gameObject.name);
+                res = allAnimators[i];
+                break;
+            }
+        }
+        return res;
+    }
+
+    void SetAnimator()
+    {
+        curr.SetBool("Aim", isAiming);
+        curr.enabled = isAiming;
+    }
+
+    public bool AllowWeaponBob()
+    {
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            if (grounded) return true;
+        }
+        return false;
     }
 
     void Look()
@@ -95,7 +184,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * mouseSensitivity);
 
         verticalLookRotation += Input.GetAxisRaw("Mouse Y") * mouseSensitivity;
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -55f, 90f);
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -65f, 90f);
 
         cameraHolder.transform.localEulerAngles = Vector3.left * verticalLookRotation;
     }
@@ -208,6 +297,44 @@ public class PlayerController : MonoBehaviourPunCallbacks
             return;
 
         rb.MovePosition(rb.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        PV.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    void RPC_TakeDamage(float damage)
+    {
+
+        if (!PV.IsMine)
+        {
+            return;
+        }
+
+        if (UIController.instance.currentArmourValue >= 0)
+        {
+            UIController.instance.currentArmourValue -= Time.deltaTime * damage;
+            UIController.instance.UpdateUI();
+        }
+
+        if (UIController.instance.currentArmourValue <= 0 && UIController.instance.currentHealthValue >= 0)
+        {
+            UIController.instance.currentHealthValue -= Time.deltaTime * damage;
+            UIController.instance.UpdateUI();
+        }
+
+        if (UIController.instance.currentHealthValue <= 0)
+        {
+            Die();
+        }
+
+    }
+
+    void Die()
+    {
+        playerManager.Die();
     }
 
 }
