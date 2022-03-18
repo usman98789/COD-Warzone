@@ -38,8 +38,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] Animator macAnimator;
     private Animator curr;
 
+    [SerializeField] GameObject scopeOverlay;
+    [SerializeField] Camera cameraFOV;
+
     private bool isAiming = false;
     private Animator[] allAnimators = new Animator[] {};
+
+    [SerializeField] Vector3 smgNormalPos;
+    [SerializeField] Vector3 smgAimPos;
+    public float aimSmooth = 5;
 
     private void Awake()
     {
@@ -117,14 +124,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             items[itemIndex].Use();
         }
 
+        //DetermineAim();
+
         if (Input.GetMouseButtonDown(1))
         {
             isAiming = true;
             SetAnimator();
+            if (curr.gameObject.name == "Kar98")
+            {
+                StartCoroutine(OnScoped());
+            }
         }
 
         if (Input.GetMouseButtonUp(1))
         {
+            if (curr.gameObject.name == "Kar98")
+            {
+                StartCoroutine(UnScoped());
+            }
             isAiming = false;
             SetAnimator();
         }
@@ -141,27 +158,40 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     }
 
+    void DetermineAim()
+    {
+        Vector3 target = smgNormalPos;
+        if (Input.GetMouseButton(1))
+        {
+            target = smgAimPos;
+        }
+
+        Vector3 desiredPos = Vector3.Lerp(smgAnimator.gameObject.transform.localPosition, target, Time.deltaTime * aimSmooth);
+        smgAnimator.gameObject.transform.localPosition = desiredPos;
+    }
+
+    IEnumerator OnScoped()
+    {
+        yield return new WaitForSeconds(0.07f);
+        scopeOverlay.SetActive(true);
+        curr.gameObject.SetActive(false);
+        cameraFOV.fieldOfView = 35;
+    }
+
+    IEnumerator UnScoped()
+    {
+        yield return new WaitForSeconds(0.07f);
+        scopeOverlay.SetActive(false);
+        curr.gameObject.SetActive(true);
+        cameraFOV.fieldOfView = 75;
+    }
+
     void disableAnimator()
     {
         for (int i = 0; i < allAnimators.Length; i++)
         {
             allAnimators[i].enabled = false;
         }
-    }
-
-    Animator getCurrentAnimator()
-    {
-        var res = new Animator();
-        for(int i =0; i < allAnimators.Length; i++)
-        {
-            if (allAnimators[i].gameObject.activeInHierarchy)
-            {
-                Debug.Log("FOUND IT: " + allAnimators[i].gameObject.name);
-                res = allAnimators[i];
-                break;
-            }
-        }
-        return res;
     }
 
     void SetAnimator()
