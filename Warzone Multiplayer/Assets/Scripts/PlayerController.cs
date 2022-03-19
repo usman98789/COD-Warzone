@@ -30,23 +30,21 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     [SerializeField] WeaponBob weaponBobScript;
 
-    [SerializeField] Animator smgAnimator;
-    [SerializeField] Animator pistolAnimator;
-    [SerializeField] Animator shotgunAnimator;
-    [SerializeField] Animator sniperAnimator;
-    [SerializeField] Animator arAnimator;
-    [SerializeField] Animator macAnimator;
-    private Animator curr;
+    [SerializeField] GameObject smg;
+    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject shotgun;
+    [SerializeField] GameObject sniper;
+    [SerializeField] GameObject ar;
+    [SerializeField] GameObject mac;
+    private GameObject curr;
 
     [SerializeField] GameObject scopeOverlay;
     [SerializeField] Camera cameraFOV;
 
     private bool isAiming = false;
-    private Animator[] allAnimators = new Animator[] {};
+    private GameObject[] allObjects = new GameObject[] {};
 
-    [SerializeField] Vector3 smgNormalPos;
-    [SerializeField] Vector3 smgAimPos;
-    public float aimSmooth = 5;
+    public float aimSmooth = 10;
 
     private void Awake()
     {
@@ -70,9 +68,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             Destroy(rb);
         }
 
-        allAnimators = new Animator[] { smgAnimator, pistolAnimator, shotgunAnimator, sniperAnimator, arAnimator, macAnimator };
-        disableAnimator();
-        curr = allAnimators[0];
+        allObjects = new GameObject[] { smg, pistol, shotgun, sniper, ar, mac };
+        curr = allObjects[0];
     }
 
     private void Update()
@@ -98,11 +95,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             if (itemIndex >= items.Length - 1)
             {
-                curr = allAnimators[0];
+                curr = allObjects[0];
                 EquipItem(0);
             } else
             {
-                curr = allAnimators[itemIndex + 1];
+                curr = allObjects[itemIndex + 1];
                 EquipItem(itemIndex + 1);
             }
         }
@@ -110,11 +107,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             if (itemIndex <= 0)
             {
-                curr = allAnimators[items.Length - 1];
+                curr = allObjects[items.Length - 1];
                 EquipItem(items.Length - 1);
             } else
             {
-                curr = allAnimators[itemIndex - 1];
+                curr = allObjects[itemIndex - 1];
                 EquipItem(itemIndex - 1);
             }
         }
@@ -124,17 +121,18 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             items[itemIndex].Use();
         }
 
-        //DetermineAim();
+        DetermineAim();
 
         if (Input.GetMouseButtonDown(1))
         {
             isAiming = true;
-            SetAnimator();
+
             if (curr.gameObject.name == "Kar98")
             {
                 StartCoroutine(OnScoped());
             }
         }
+
 
         if (Input.GetMouseButtonUp(1))
         {
@@ -143,14 +141,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 StartCoroutine(UnScoped());
             }
             isAiming = false;
-            SetAnimator();
         }
 
         if (!isAiming)
         {
             weaponBobScript.enabled = true;
             weaponBobScript.currentSpeed = AllowWeaponBob() ? (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed) : 0;
-        } else
+        }
+        else
         {
 
             weaponBobScript.enabled = false;
@@ -160,19 +158,32 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     void DetermineAim()
     {
-        Vector3 target = smgNormalPos;
-        if (Input.GetMouseButton(1))
+        Vector3 target;
+        if (isAiming)
         {
-            target = smgAimPos;
+            target = curr.gameObject.GetComponent<AimPosition>().normalPos;
+        } else
+        {
+            target = curr.transform.localPosition;
         }
 
-        Vector3 desiredPos = Vector3.Lerp(smgAnimator.gameObject.transform.localPosition, target, Time.deltaTime * aimSmooth);
-        smgAnimator.gameObject.transform.localPosition = desiredPos;
+        if (Input.GetMouseButton(1))
+        {
+            weaponBobScript.enabled = false;
+            target = curr.gameObject.GetComponent<AimPosition>().aimPos;
+        }
+
+        Vector3 desiredPos = Vector3.Lerp(curr.transform.localPosition, target, Time.deltaTime * aimSmooth);
+        curr.transform.localPosition = desiredPos;
+    }
+
+    void getCurrNormalPos()
+    {
     }
 
     IEnumerator OnScoped()
     {
-        yield return new WaitForSeconds(0.07f);
+        yield return new WaitForSeconds(0.15f);
         scopeOverlay.SetActive(true);
         curr.gameObject.SetActive(false);
         cameraFOV.fieldOfView = 35;
@@ -180,24 +191,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     IEnumerator UnScoped()
     {
-        yield return new WaitForSeconds(0.07f);
+        yield return new WaitForSeconds(0.15f);
         scopeOverlay.SetActive(false);
         curr.gameObject.SetActive(true);
         cameraFOV.fieldOfView = 75;
-    }
-
-    void disableAnimator()
-    {
-        for (int i = 0; i < allAnimators.Length; i++)
-        {
-            allAnimators[i].enabled = false;
-        }
-    }
-
-    void SetAnimator()
-    {
-        curr.SetBool("Aim", isAiming);
-        curr.enabled = isAiming;
     }
 
     public bool AllowWeaponBob()
