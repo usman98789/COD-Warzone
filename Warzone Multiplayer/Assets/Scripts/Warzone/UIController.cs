@@ -62,7 +62,6 @@ namespace SpeedTutorBattleRoyaleUI
 
         public void UpdateArmourAmount(float armourValue, bool buystation)
         {
-            Debug.Log("Update Armor Amount with armorval bool buy " + armourValue + buystation);
             if (playerArmourAmount <= 8)
             {
                 if (buystation && playerCash >= 1500)
@@ -93,6 +92,8 @@ namespace SpeedTutorBattleRoyaleUI
             armourAmount.text = playerArmourAmount.ToString("0");
 
         }
+
+
 
 
         public void UpdateCashUI(float cashValue)
@@ -130,8 +131,9 @@ namespace SpeedTutorBattleRoyaleUI
                 }
             }
 
-            if (Input.GetKey(equipArmourKey))
+            if (Input.GetKey(equipArmourKey) && !Input.GetMouseButton(0))
             {
+                Debug.Log("YOO FIRST");
                 //animator.SetBool("armor", true);
 
                 if (playerArmourAmount >= 1)
@@ -167,8 +169,10 @@ namespace SpeedTutorBattleRoyaleUI
                 }
             }
 
-            if (Input.GetKeyUp(equipArmourKey))
+            if (Input.GetKeyUp(equipArmourKey) && (!Input.GetMouseButtonDown(0) || !Input.GetMouseButtonDown(1)))
             {
+                Debug.Log("YOO Second");
+
                 currentArmourTimer = maxArmourTimer;
                 //animator.SetBool("armor", false);
             }

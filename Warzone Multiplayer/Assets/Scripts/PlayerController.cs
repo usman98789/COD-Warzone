@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         allObjects = new GameObject[] { smg, pistol, shotgun, sniper, ar, mac };
         curr = allObjects[0];
+        curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
+
     }
 
     private void Update()
@@ -102,6 +104,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 curr = allObjects[itemIndex + 1];
                 EquipItem(itemIndex + 1);
             }
+            curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
         }
         else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
         {
@@ -114,6 +117,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 curr = allObjects[itemIndex - 1];
                 EquipItem(itemIndex - 1);
             }
+            curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
         }
 
         if (Input.GetMouseButton(0))
@@ -175,10 +179,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         Vector3 desiredPos = Vector3.Lerp(curr.transform.localPosition, target, Time.deltaTime * aimSmooth);
         curr.transform.localPosition = desiredPos;
-    }
-
-    void getCurrNormalPos()
-    {
     }
 
     IEnumerator OnScoped()

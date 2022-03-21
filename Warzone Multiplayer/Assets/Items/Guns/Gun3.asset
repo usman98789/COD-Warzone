@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Gun3
   m_EditorClassIdentifier: 
   ItemName: shotgun
-  damage: 70
-  fireRate: 0.5
+  damage: 60
+  fireRate: 0.4
   clipSize: 10
+  kickback: 0.1

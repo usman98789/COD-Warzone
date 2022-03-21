@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Kar98
   damage: 100
-  fireRate: 1
+  fireRate: 0.4
   clipSize: 2
+  kickback: 0.05

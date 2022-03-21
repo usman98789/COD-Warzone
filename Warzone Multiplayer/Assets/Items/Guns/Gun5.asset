@@ -16,3 +16,4 @@ MonoBehaviour:
   damage: 50
   fireRate: 0.1
   clipSize: 25
+  kickback: 0.01
