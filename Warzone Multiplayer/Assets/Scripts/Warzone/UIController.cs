@@ -93,9 +93,6 @@ namespace SpeedTutorBattleRoyaleUI
 
         }
 
-
-
-
         public void UpdateCashUI(float cashValue)
         {
             Debug.Log("Update cash with " + cashValue);
@@ -133,7 +130,6 @@ namespace SpeedTutorBattleRoyaleUI
 
             if (Input.GetKey(equipArmourKey) && !Input.GetMouseButton(0))
             {
-                Debug.Log("YOO FIRST");
                 //animator.SetBool("armor", true);
 
                 if (playerArmourAmount >= 1)
@@ -171,8 +167,6 @@ namespace SpeedTutorBattleRoyaleUI
 
             if (Input.GetKeyUp(equipArmourKey) && (!Input.GetMouseButtonDown(0) || !Input.GetMouseButtonDown(1)))
             {
-                Debug.Log("YOO Second");
-
                 currentArmourTimer = maxArmourTimer;
                 //animator.SetBool("armor", false);
             }

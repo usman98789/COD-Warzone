@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Gun6
   m_EditorClassIdentifier: 
   ItemName: mac10
-  damage: 60
+  damage: 1200
   fireRate: 0.1
   clipSize: 20
   kickback: 0.01
+  shootSound: {fileID: 8300000, guid: 3190d4b85166cd142bb68bba6fd0a6b1, type: 3}
+  reloadSound: {fileID: 8300000, guid: 49080b46e2f27d84bb174d5da498ab98, type: 3}

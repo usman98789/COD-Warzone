@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc06d6bf590a38448efc211e164c913, type: 3}
   m_Name: Gun5
   m_EditorClassIdentifier: 
-  ItemName: M4A1 Rifle
-  damage: 50
+  ItemName: M4A1
+  damage: 850
   fireRate: 0.1
   clipSize: 25
   kickback: 0.01
+  shootSound: {fileID: 8300000, guid: 789b76602071d7345b9760af173bb4c4, type: 3}
+  reloadSound: {fileID: 8300000, guid: 9c31f0e471e94ce40a6310cdebcd3c4b, type: 3}

@@ -17,8 +17,10 @@ public class WeaponAim : MonoBehaviour
             target = aimingLocalPoistion;
         }
 
+
         Vector3 desiredPos = Vector3.Lerp(transform.localPosition, target, Time.deltaTime * aimSmooth);
         transform.localPosition = desiredPos;
+        
     }
 
 }

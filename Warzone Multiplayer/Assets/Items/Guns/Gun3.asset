@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Gun3
   m_EditorClassIdentifier: 
   ItemName: shotgun
-  damage: 60
-  fireRate: 0.4
+  damage: 3500
+  fireRate: 1
   clipSize: 10
   kickback: 0.1
+  shootSound: {fileID: 8300000, guid: 59a83f9acf20126468c01f422ed1eece, type: 3}
+  reloadSound: {fileID: 8300000, guid: cbbc9de6874c91d40b9e1cc992cbc81e, type: 3}

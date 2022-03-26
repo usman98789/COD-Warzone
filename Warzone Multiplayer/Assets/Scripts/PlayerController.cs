@@ -45,12 +45,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     private GameObject[] allObjects = new GameObject[] {};
 
     public float aimSmooth = 10;
+    private AudioSource audioSrc;
+
+    [SerializeField] AudioClip[] footsteps;
+    private float footsteptimer = 0;
+    private float GetCurrOffset => Input.GetKey(KeyCode.LeftShift) ? 0.1f * 0.8f : 0.1f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         PV = GetComponent<PhotonView>();
-
+        audioSrc = GetComponent<AudioSource>();
         playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
     }
 
@@ -70,7 +75,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         allObjects = new GameObject[] { smg, pistol, shotgun, sniper, ar, mac };
         curr = allObjects[0];
-        curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
+        if (PV.IsMine)
+        {
+            curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
+        }
 
     }
 
@@ -221,6 +229,28 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
+
+        if (moveAmount.x > 0 || moveAmount.y > 0 || moveAmount.z > 0 && audioSrc.isPlaying == false)
+        {
+            PV.RPC("RPC_PlayFootStep", RpcTarget.All);
+        } 
+
+    }
+
+    [PunRPC]
+    public void RPC_PlayFootStep()
+    {
+        if (!grounded) return;
+        if (!Input.anyKey) return;
+
+        footsteptimer -= Time.deltaTime;
+
+        if (footsteptimer <= 0)
+        {
+            audioSrc.volume = Random.Range(0.5f, 0.7f);
+            //audioSrc.PlayOneShot(footsteps[Random.Range(0, footsteps.Length - 1)]);
+            footsteptimer = GetCurrOffset;
+        }
 
     }
 

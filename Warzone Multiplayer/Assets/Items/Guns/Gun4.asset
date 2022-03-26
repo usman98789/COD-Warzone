@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Gun4
   m_EditorClassIdentifier: 
   ItemName: Kar98
-  damage: 100
-  fireRate: 0.4
+  damage: 15000
+  fireRate: 1
   clipSize: 2
   kickback: 0.05
+  shootSound: {fileID: 8300000, guid: d0626af0aef65f04f9028e54166bc283, type: 3}
+  reloadSound: {fileID: 8300000, guid: 9b01b627d9ef631469907e70944a435b, type: 3}

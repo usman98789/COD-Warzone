@@ -9,5 +9,7 @@ public class GunInfo : ItemInfo
     public float fireRate = 0.1f;
     public int clipSize = 30;
     public float kickback;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
 
 }

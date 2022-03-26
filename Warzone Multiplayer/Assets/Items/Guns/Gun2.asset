@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Gun2
   m_EditorClassIdentifier: 
   ItemName: Pistol
-  damage: 40
+  damage: 1500
   fireRate: 0.3
   clipSize: 30
   kickback: 0.02
+  shootSound: {fileID: 8300000, guid: f9f5d41103a07c4479a3102bad84994d, type: 3}
+  reloadSound: {fileID: 8300000, guid: 2390c68778480cb4791964e4ac1b5d62, type: 3}

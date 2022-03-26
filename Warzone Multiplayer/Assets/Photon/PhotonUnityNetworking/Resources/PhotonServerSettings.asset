@@ -51,6 +51,9 @@ MonoBehaviour:
   - RPC_HeldArmor
   - RPC_HasOpened
   - RPC_TakeDamage
+  - RPC_PlayFootStep
+  - RPC_StopFootStep
+  - RPC_ShootAudio
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
