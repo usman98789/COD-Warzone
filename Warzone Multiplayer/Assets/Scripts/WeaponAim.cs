@@ -13,7 +13,6 @@ public class WeaponAim : MonoBehaviour
         Vector3 target = normalLocalPosition;
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("AIMING LOCAL IS" + aimingLocalPoistion);
             target = aimingLocalPoistion;
         }
 

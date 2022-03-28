@@ -111,9 +111,9 @@ namespace SpeedTutorBattleRoyaleUI
                     if (currentHealthTimer <= 0)
                     {
                         currentHealthValue += Time.deltaTime * 10;
+
                         UpdateUI();
                         currentHealthTimer = 0;
-
                         if (currentHealthValue >= maximumHealthBars)
                         {
                             currentHealthTimer = maxHealthTimer;
@@ -126,12 +126,11 @@ namespace SpeedTutorBattleRoyaleUI
                     regenHealth = false;
                     currentHealthTimer = maxHealthTimer;
                 }
+
             }
 
             if (Input.GetKey(equipArmourKey) && !Input.GetMouseButton(0))
             {
-                //animator.SetBool("armor", true);
-
                 if (playerArmourAmount >= 1)
                 {
                     currentArmourTimer -= Time.deltaTime;
@@ -158,7 +157,6 @@ namespace SpeedTutorBattleRoyaleUI
                             }
                             UpdateUI();
                             FindObjectOfType<AudioManager>().Play("ArmorUp");
-
                             currentArmourTimer = maxArmourTimer;
                         }
                     }
@@ -168,7 +166,6 @@ namespace SpeedTutorBattleRoyaleUI
             if (Input.GetKeyUp(equipArmourKey) && (!Input.GetMouseButtonDown(0) || !Input.GetMouseButtonDown(1)))
             {
                 currentArmourTimer = maxArmourTimer;
-                //animator.SetBool("armor", false);
             }
 
         }

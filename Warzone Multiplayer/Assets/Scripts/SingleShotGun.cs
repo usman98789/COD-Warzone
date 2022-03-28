@@ -20,6 +20,9 @@ public class SingleShotGun : Gun
     public bool reload = false;
     public GameObject gunObj;
 
+    [SerializeField] GameObject hitmarker;
+    [SerializeField] AudioClip hitmarkerSound;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -139,7 +142,20 @@ public class SingleShotGun : Gun
         ray.origin = cam.transform.position;
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
+            if(hit.collider.gameObject.GetComponent<IDamageable>() != null)
+            {
+                Debug.Log("HITMARKER");
+                hitmarker.SetActive(true);
+                gameObject.transform.GetChild(0).GetComponent<AudioSource>().Play();
+                Invoke("disableHitmarker", 0.2f);
+            }
+
             hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(((GunInfo)itemInfo).damage);
         }
+    }
+
+    void disableHitmarker()
+    {
+        hitmarker.SetActive(false);
     }
 }

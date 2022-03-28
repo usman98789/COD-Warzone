@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
@@ -50,6 +51,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] AudioClip[] footsteps;
     private float footsteptimer = 0;
     private float GetCurrOffset => Input.GetKey(KeyCode.LeftShift) ? 0.1f * 0.8f : 0.1f;
+
+    [SerializeField] Image redSplatterImage;
+    [SerializeField] Image redialCircle;
+
+    [SerializeField] AudioClip armorBreak;
+
+    private bool firstBreak = false;
 
     private void Awake()
     {
@@ -164,6 +172,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
 
             weaponBobScript.enabled = false;
+        }
+
+        if (UIController.instance.regenHealth)
+        {
+            Color splatterAlpha = redSplatterImage.color;
+            splatterAlpha.a = 1 - UIController.instance.currentHealthValue / 100;
+            redSplatterImage.color = splatterAlpha;
         }
 
     }
@@ -364,7 +379,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [PunRPC]
     void RPC_TakeDamage(float damage)
     {
-
+        Color splatterAlpha = redSplatterImage.color;
         if (!PV.IsMine)
         {
             return;
@@ -372,21 +387,46 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         if (UIController.instance.currentArmourValue >= 0)
         {
+            splatterAlpha.a = 1 - ((UIController.instance.currentArmourValue + UIController.instance.currentHealthValue) / 400);
+            firstBreak = false;
             UIController.instance.currentArmourValue -= Time.deltaTime * damage;
             UIController.instance.UpdateUI();
         }
 
         if (UIController.instance.currentArmourValue <= 0 && UIController.instance.currentHealthValue >= 0)
         {
+            if (!firstBreak)
+            {
+                firstBreak = true;
+                PV.RPC("RPC_ArmorBreak", RpcTarget.All);
+            }
+            StartCoroutine(HurtFlash());
+            splatterAlpha.a = 1 - (UIController.instance.currentHealthValue / 400);
+
             UIController.instance.currentHealthValue -= Time.deltaTime * damage;
             UIController.instance.UpdateUI();
         }
+
+        redSplatterImage.color = splatterAlpha;
 
         if (UIController.instance.currentHealthValue <= 0)
         {
             Die();
         }
 
+    }
+
+    [PunRPC]
+    public void RPC_ArmorBreak()
+    {
+        AudioSource.PlayClipAtPoint(armorBreak, transform.localPosition);
+    }
+
+    IEnumerator HurtFlash()
+    {
+        redialCircle.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+        redialCircle.enabled = false;
     }
 
     void Die()

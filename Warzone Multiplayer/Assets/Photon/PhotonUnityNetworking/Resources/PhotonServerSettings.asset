@@ -54,6 +54,7 @@ MonoBehaviour:
   - RPC_PlayFootStep
   - RPC_StopFootStep
   - RPC_ShootAudio
+  - RPC_ArmorBreak
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
