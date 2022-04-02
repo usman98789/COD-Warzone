@@ -152,8 +152,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25.6, y: 0.67700195}
-  m_SizeDelta: {x: 10, y: 2}
+  m_AnchoredPosition: {x: -75.6, y: 0.67700195}
+  m_SizeDelta: {x: 10, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &920630537516486891
 CanvasRenderer:
@@ -1003,7 +1003,6 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: e0066027822fcd749aec05b1d861e5a0, type: 2}
   itemGameObject: {fileID: 5122937787205371853}
   cam: {fileID: 2350181607446746925}
-  ammoDisplay: {fileID: 7486603035556808081}
   muzzleFlash: {fileID: 2953025021680818218}
   flashes:
   - {fileID: 21300000, guid: 6ef441f62d0eb194db0fc88f7acf2400, type: 3}
@@ -1026,7 +1025,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3632,7 +3631,6 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: faaadd9fb932c4d41b09511f5d872add, type: 2}
   itemGameObject: {fileID: 2095703380454721312}
   cam: {fileID: 2350181607446746925}
-  ammoDisplay: {fileID: 7486603035556808081}
   muzzleFlash: {fileID: 1846802481427542655}
   flashes:
   - {fileID: 21300000, guid: 6ef441f62d0eb194db0fc88f7acf2400, type: 3}
@@ -4002,7 +4000,6 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: b5671dcdc277f6f4e9903a6d03e864db, type: 2}
   itemGameObject: {fileID: 6491562581891878287}
   cam: {fileID: 2350181607446746925}
-  ammoDisplay: {fileID: 7486603035556808081}
   muzzleFlash: {fileID: 3314922074652245841}
   flashes:
   - {fileID: 21300000, guid: 6ef441f62d0eb194db0fc88f7acf2400, type: 3}
@@ -4559,6 +4556,7 @@ GameObject:
   - component: {fileID: 1017471068305397979}
   - component: {fileID: 7666796812244306465}
   - component: {fileID: -3520870306627425356}
+  - component: {fileID: -8315775047985238941}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Player
@@ -4690,10 +4688,7 @@ MonoBehaviour:
   scopeOverlay: {fileID: 4022600908979029066}
   cameraFOV: {fileID: 2350181607446746925}
   aimSmooth: 15
-  footsteps:
-  - {fileID: 8300000, guid: 8d239ef52a88b3241a4391bce553b8ae, type: 3}
-  - {fileID: 8300000, guid: 87f4eb8e33582ec49b693ae5e2027d3d, type: 3}
-  - {fileID: 8300000, guid: c68016851bae65045992a0bac16da8ff, type: 3}
+  footsteps: {fileID: 8300000, guid: 004064784aaf45740a0cdbad527f4014, type: 3}
   redSplatterImage: {fileID: 144244455836030999}
   redialCircle: {fileID: 2447532887945056671}
   armorBreak: {fileID: 8300000, guid: 3319cc17a54b4c445a329a8a08790b95, type: 3}
@@ -4734,6 +4729,9 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 2
     Name: Move
+  - Type: 4
+    SynchronizeType: 2
+    Name: slide
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -4763,7 +4761,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 004064784aaf45740a0cdbad527f4014, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4849,6 +4847,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8315775047985238941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822773447142225055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d504d2a5483e3947b4ed2e2f2546f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 5446564172887138666}
+  playerObj: {fileID: 5446564172887138666}
+  maxSlideTime: 1.2
+  slideForce: 1
 --- !u!1 &2845073933345390043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5580,8 +5594,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14, y: 0.67700195}
-  m_SizeDelta: {x: 10, y: 2}
+  m_AnchoredPosition: {x: 64, y: 0.67700195}
+  m_SizeDelta: {x: 10, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6674000184889184051
 CanvasRenderer:
@@ -5780,7 +5794,6 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: 3e7fadd670fb093488981f7d0ac7bab7, type: 2}
   itemGameObject: {fileID: 1665342498521839095}
   cam: {fileID: 2350181607446746925}
-  ammoDisplay: {fileID: 7486603035556808081}
   muzzleFlash: {fileID: 3042598551138342743}
   flashes:
   - {fileID: 21300000, guid: 6ef441f62d0eb194db0fc88f7acf2400, type: 3}
@@ -6944,7 +6957,6 @@ GameObject:
   - component: {fileID: 2034212987605730511}
   - component: {fileID: 7486603035556808081}
   - component: {fileID: 5154335038831971307}
-  - component: {fileID: 8921542781623220225}
   m_Layer: 5
   m_Name: Ammo
   m_TagString: Untagged
@@ -7012,7 +7024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 44 / 45
+  m_Text: 
 --- !u!114 &5154335038831971307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7035,20 +7047,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 1002
   isRuntimeInstantiated: 1
---- !u!114 &8921542781623220225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4373091653954925117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e169c9456f248954c90b5f42a4b6fb01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PV: {fileID: 6134282174793955275}
-  ammoDisplay: {fileID: 7486603035556808081}
 --- !u!1 &4424086094068194950
 GameObject:
   m_ObjectHideFlags: 0
@@ -7144,7 +7142,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -5.7509155, y: 0.67700195}
-  m_SizeDelta: {x: 2, y: 2}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7740532263759138258
 CanvasRenderer:
@@ -7882,7 +7880,7 @@ MonoBehaviour:
   armourHealthUI1: {fileID: 5703523242164439194}
   armourHealthUI2: {fileID: 8599170995987376454}
   armourHealthUI3: {fileID: 3826598756917663350}
-  redSplatterImage: {fileID: 144244455836030999}
+  ammoDisplay: {fileID: 7486603035556808081}
 --- !u!114 &3525276268834434215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8662,7 +8660,6 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: bbbcc126a877fa6458bd69ba4474ab69, type: 2}
   itemGameObject: {fileID: 5608687958678823444}
   cam: {fileID: 2350181607446746925}
-  ammoDisplay: {fileID: 7486603035556808081}
   muzzleFlash: {fileID: 859546206641234589}
   flashes:
   - {fileID: 21300000, guid: 6ef441f62d0eb194db0fc88f7acf2400, type: 3}
@@ -9918,7 +9915,6 @@ MonoBehaviour:
   itemInfo: {fileID: 11400000, guid: 42fd2fb649685d848ba283ccda4eda7b, type: 2}
   itemGameObject: {fileID: 4250969890587367116}
   cam: {fileID: 2350181607446746925}
-  ammoDisplay: {fileID: 7486603035556808081}
   muzzleFlash: {fileID: 2653376007901341252}
   flashes:
   - {fileID: 21300000, guid: 6ef441f62d0eb194db0fc88f7acf2400, type: 3}
@@ -10597,8 +10593,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.7, y: -18.7}
-  m_SizeDelta: {x: 10, y: 2}
+  m_AnchoredPosition: {x: -5.7, y: -68.7}
+  m_SizeDelta: {x: 10, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2833330132902453137
 CanvasRenderer:
@@ -14033,8 +14029,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.7, y: 20}
-  m_SizeDelta: {x: 10, y: 2}
+  m_AnchoredPosition: {x: -5.7, y: 70}
+  m_SizeDelta: {x: 10, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &532867793003049176
 CanvasRenderer:

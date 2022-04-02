@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SpeedTutorBattleRoyaleUI;
+
 
 public class SingleShotGun : Gun
 {
     [SerializeField] Camera cam;
-    [SerializeField] Text ammoDisplay;
 
     [SerializeField] Image muzzleFlash;
     [SerializeField] Sprite[] flashes;
@@ -26,11 +27,8 @@ public class SingleShotGun : Gun
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        if (PV.IsMine)
-        {
-            currAmmoInClip = ((GunInfo)itemInfo).clipSize;
-        }
         canShoot = true;
+        UpdateAmmo();
     }
 
     private void Update()
@@ -45,24 +43,29 @@ public class SingleShotGun : Gun
 
     IEnumerator ReloadGun()
     {
+        if (!PV.IsMine) yield return null;
         reload = true;
         Vector3 curr = gunObj.transform.localScale;
         gunObj.transform.localScale = new Vector3(0, 0, 0);
-        audioSource.volume = 0.5f;
+        audioSource.clip = ((GunInfo)itemInfo).reloadSound;
+        audioSource.volume = 0.2f;
         audioSource.PlayOneShot(((GunInfo)itemInfo).reloadSound);
-        audioSource.volume = 1f;
         yield return new WaitForSeconds(((GunInfo)itemInfo).reloadSound.length);
         reload = false;
         gunObj.transform.localScale = curr;
         currAmmoInClip = ((GunInfo)itemInfo).clipSize;
-        ammoDisplay.gameObject.GetComponent<UpdateAmmo>().UpdateAmount(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
+        Debug.Log("SingleShotGun ReloadGun() currAmmoInClip" + currAmmoInClip);
+        UIController.instance.UpdateAmmo(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
+        UIController.instance.UpdateUI();
     }
 
     public void UpdateAmmo()
     {
         if (!PV.IsMine) return;
         currAmmoInClip = ((GunInfo)itemInfo).clipSize;
-        ammoDisplay.gameObject.GetComponent<UpdateAmmo>().UpdateAmount(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
+        Debug.Log("SingleShotGun UpdateAmmo() currAmmoInClip" + currAmmoInClip);
+        UIController.instance.UpdateAmmo(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
+        UIController.instance.UpdateUI();
     }
 
     public override void Use()
@@ -79,7 +82,9 @@ public class SingleShotGun : Gun
     {
         if (!PV.IsMine) return;
         if (reload) return;
-        ammoDisplay.gameObject.GetComponent<UpdateAmmo>().UpdateAmount(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
+        Debug.Log("SingleShotGun Shoot() currAmmoInClip" + currAmmoInClip);
+        UIController.instance.UpdateAmmo(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
+        UIController.instance.UpdateUI();
         if (canShoot && currAmmoInClip > 0)
         {
             canShoot = false;
@@ -97,7 +102,6 @@ public class SingleShotGun : Gun
         RayCastEnemy();
         yield return new WaitForSeconds(((GunInfo)itemInfo).fireRate);
         canShoot = true;
-
     }
 
     [PunRPC]
@@ -111,6 +115,8 @@ public class SingleShotGun : Gun
                 AudioSource.PlayClipAtPoint(((GunInfo)itemInfo).shootSound, transform.position);
             } else
             {
+                audioSource.clip = ((GunInfo)itemInfo).shootSound;
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(((GunInfo)itemInfo).shootSound);
             }
         }
@@ -122,6 +128,8 @@ public class SingleShotGun : Gun
             }
             else 
             {
+                audioSource.clip = ((GunInfo)itemInfo).shootSound;
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(((GunInfo)itemInfo).shootSound);
             }
         }
@@ -144,7 +152,6 @@ public class SingleShotGun : Gun
         {
             if(hit.collider.gameObject.GetComponent<IDamageable>() != null)
             {
-                Debug.Log("HITMARKER");
                 hitmarker.SetActive(true);
                 gameObject.transform.GetChild(0).GetComponent<AudioSource>().Play();
                 Invoke("disableHitmarker", 0.2f);

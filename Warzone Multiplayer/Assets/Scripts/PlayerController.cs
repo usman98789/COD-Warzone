@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public float aimSmooth = 10;
     private AudioSource audioSrc;
 
-    [SerializeField] AudioClip[] footsteps;
+    [SerializeField] AudioClip footsteps;
     private float footsteptimer = 0;
     private float GetCurrOffset => Input.GetKey(KeyCode.LeftShift) ? 0.1f * 0.8f : 0.1f;
 
@@ -120,7 +120,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 curr = allObjects[itemIndex + 1];
                 EquipItem(itemIndex + 1);
             }
-            curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
+            if (PV.IsMine)
+            {
+                curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
+            }
         }
         else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
         {
@@ -133,7 +136,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 curr = allObjects[itemIndex - 1];
                 EquipItem(itemIndex - 1);
             }
-            curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
+            if (PV.IsMine)
+            {
+                curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
+            }
         }
 
         if (Input.GetMouseButton(0))
@@ -176,6 +182,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         if (UIController.instance.regenHealth)
         {
+            Debug.Log("GONNA HEAL");
             Color splatterAlpha = redSplatterImage.color;
             splatterAlpha.a = 1 - UIController.instance.currentHealthValue / 100;
             redSplatterImage.color = splatterAlpha;
@@ -244,29 +251,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
-
-        if (moveAmount.x > 0 || moveAmount.y > 0 || moveAmount.z > 0 && audioSrc.isPlaying == false)
-        {
-            PV.RPC("RPC_PlayFootStep", RpcTarget.All);
-        } 
-
-    }
-
-    [PunRPC]
-    public void RPC_PlayFootStep()
-    {
-        if (!grounded) return;
-        if (!Input.anyKey) return;
-
-        footsteptimer -= Time.deltaTime;
-
-        if (footsteptimer <= 0)
-        {
-            audioSrc.volume = Random.Range(0.5f, 0.7f);
-            //audioSrc.PlayOneShot(footsteps[Random.Range(0, footsteps.Length - 1)]);
-            footsteptimer = GetCurrOffset;
-        }
-
     }
 
     void Jump()
@@ -365,10 +349,41 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     private void FixedUpdate()
     {
-        if (!PV.IsMine)
-            return;
+        if (!PV.IsMine) return;
 
         rb.MovePosition(rb.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
+        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        if (targetVelocity.x != 0 || targetVelocity.z != 0 && grounded)
+        {
+            var isSprinting = false;
+            audioSrc.volume = Random.Range(0.7f, 0.9f);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                isSprinting = true;
+                audioSrc.pitch = Random.Range(1.7f, 1.9f);
+            }
+            else
+            {
+                audioSrc.pitch = Random.Range(0.8f, 1f);
+            }
+            if (!audioSrc.isPlaying && targetVelocity.y == 0)
+            {
+                audioSrc.Play();
+            }
+
+            if (!grounded)
+            {
+                if (isSprinting)
+                {
+                    audioSrc.PlayDelayed(0.001f);
+                }
+                else
+                {
+                    audioSrc.PlayDelayed(0.1f);
+                }
+            }
+        }
     }
 
     public void TakeDamage(float damage)
@@ -387,9 +402,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         if (UIController.instance.currentArmourValue >= 0)
         {
-            splatterAlpha.a = 1 - ((UIController.instance.currentArmourValue + UIController.instance.currentHealthValue) / 400);
             firstBreak = false;
             UIController.instance.currentArmourValue -= Time.deltaTime * damage;
+            splatterAlpha.a = 1 - (UIController.instance.currentArmourValue / 400);
+            StartCoroutine(ArmorHurt());
             UIController.instance.UpdateUI();
         }
 
@@ -427,6 +443,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         redialCircle.enabled = true;
         yield return new WaitForSeconds(0.3f);
         redialCircle.enabled = false;
+    }
+
+
+    IEnumerator ArmorHurt()
+    {
+        Color splatterAlpha = redSplatterImage.color;
+        splatterAlpha.a = 1 - (UIController.instance.currentArmourValue / 400);
+        redSplatterImage.color = splatterAlpha;
+
+        yield return new WaitForSeconds(1f);
+
+        for (float i = splatterAlpha.a - (float) 0.1; i >= -0.1;  i-= (float) 0.1)
+        {
+            yield return new WaitForSeconds(0.2f);
+            splatterAlpha.a = i;
+        }
+
+        redSplatterImage.color = splatterAlpha;
     }
 
     void Die()

@@ -38,6 +38,10 @@ namespace SpeedTutorBattleRoyaleUI
         [SerializeField] private Image armourHealthUI2;
         [SerializeField] private Image armourHealthUI3;
 
+        [SerializeField] Text ammoDisplay;
+        private string ammoStr;
+        private string clipSize;
+
         public static UIController instance;
         void Awake()
         {
@@ -58,6 +62,14 @@ namespace SpeedTutorBattleRoyaleUI
             currentArmourTimer = maxArmourTimer;
             playerName = PhotonNetwork.NickName;
             UpdateUI();
+        }
+
+        public void UpdateAmmo(string a, string c)
+        {
+            ammoStr = a;
+            clipSize = c;
+            Debug.Log("UIController UPDATE AMMO: ammoStr " + ammoStr + " CLIP SIZE " + clipSize);
+            //ammoDisplay.text = a + " / " + c;
         }
 
         public void UpdateArmourAmount(float armourValue, bool buystation)
@@ -177,6 +189,8 @@ namespace SpeedTutorBattleRoyaleUI
             nameUI.color = nameColour;
             cashUI.text = playerCash.ToString("0");
             armourAmount.text = playerArmourAmount.ToString("0");
+            ammoDisplay.text = ammoStr + " / " + clipSize;
+            //Debug.Log("UIController UPDATEUI: ammoStr " + ammoStr + " CLIP SIZE " + clipSize);
 
             if (currentHealthValue >= 1)
             {
