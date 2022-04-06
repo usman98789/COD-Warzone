@@ -54,7 +54,7 @@ public class SingleShotGun : Gun
         reload = false;
         gunObj.transform.localScale = curr;
         currAmmoInClip = ((GunInfo)itemInfo).clipSize;
-        Debug.Log("SingleShotGun ReloadGun() currAmmoInClip" + currAmmoInClip);
+        //Debug.Log("SingleShotGun ReloadGun() currAmmoInClip" + currAmmoInClip);
         UIController.instance.UpdateAmmo(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
         UIController.instance.UpdateUI();
     }
@@ -63,7 +63,7 @@ public class SingleShotGun : Gun
     {
         if (!PV.IsMine) return;
         currAmmoInClip = ((GunInfo)itemInfo).clipSize;
-        Debug.Log("SingleShotGun UpdateAmmo() currAmmoInClip" + currAmmoInClip);
+       // Debug.Log("SingleShotGun UpdateAmmo() currAmmoInClip" + currAmmoInClip);
         UIController.instance.UpdateAmmo(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
         UIController.instance.UpdateUI();
     }
@@ -82,7 +82,7 @@ public class SingleShotGun : Gun
     {
         if (!PV.IsMine) return;
         if (reload) return;
-        Debug.Log("SingleShotGun Shoot() currAmmoInClip" + currAmmoInClip);
+        //Debug.Log("SingleShotGun Shoot() currAmmoInClip" + currAmmoInClip);
         UIController.instance.UpdateAmmo(currAmmoInClip.ToString(), ((GunInfo)itemInfo).clipSize.ToString());
         UIController.instance.UpdateUI();
         if (canShoot && currAmmoInClip > 0)

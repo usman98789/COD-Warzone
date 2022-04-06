@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     [SerializeField] GameObject scopeOverlay;
     [SerializeField] Camera cameraFOV;
 
+
+    [SerializeField] GameObject arms;
+
     private bool isAiming = false;
     private GameObject[] allObjects = new GameObject[] {};
 
@@ -59,6 +62,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     private bool firstBreak = false;
 
+    [SerializeField] GameObject rozeSkinGraphics;
+    [SerializeField] GameObject gunContainer;
+
+    private Vector3 origPos;
+
+    private float elapsedTime;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -73,10 +83,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         Cursor.visible = false;
         if (PV.IsMine)
         {
+            HideLayer(rozeSkinGraphics, LayerMask.NameToLayer("DontDraw"));
             anim = GetComponent<Animator>();
             EquipItem(0);
+
         } else
         {
+            HideLayer(gunContainer, LayerMask.NameToLayer("DontDraw"));
             Destroy(GetComponentInChildren<Camera>().gameObject);
             Destroy(rb);
         }
@@ -88,6 +101,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
         }
 
+    }
+
+    void HideLayer(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+        foreach (Transform child in obj.transform)
+        {
+            HideLayer(child.gameObject, newLayer);
+        }
     }
 
     private void Update()
@@ -182,7 +204,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         if (UIController.instance.regenHealth)
         {
-            Debug.Log("GONNA HEAL");
             Color splatterAlpha = redSplatterImage.color;
             splatterAlpha.a = 1 - UIController.instance.currentHealthValue / 100;
             redSplatterImage.color = splatterAlpha;
@@ -270,10 +291,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         itemIndex = _index;
         items[itemIndex].itemGameObject.SetActive(true);
+        arms.transform.GetChild(itemIndex).gameObject.SetActive(true);
 
         if (previousItemIndex != -1)
         {
             items[previousItemIndex].itemGameObject.SetActive(false);
+            arms.transform.GetChild(previousItemIndex).gameObject.SetActive(false);
         }
 
         previousItemIndex = itemIndex;
@@ -284,53 +307,86 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             hash.Add("itemIndex", itemIndex);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
+        origPos = new Vector3(arms.transform.GetChild(itemIndex).transform.localPosition.x, arms.transform.GetChild(itemIndex).transform.localPosition.y, arms.transform.GetChild(itemIndex).transform.localPosition.z);
+    }
+
+    void MoveGunDown()
+    {
+        if (arms.transform.GetChild(itemIndex).gameObject.transform.localPosition.y == origPos.y && !Input.GetKeyDown(KeyCode.C))
+        {
+            arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = new Vector3(origPos.x, origPos.y - 0.15f, origPos.z + 0.06f);
+        }
+    }
+
+    void MoveGunDownSlide()
+    {
+        arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = Vector3.Lerp(origPos, new Vector3(origPos.x, origPos.y - 0.65f, origPos.z + 0.06f), 1);
     }
 
     void Animate()
     {
+
         if (Input.GetKey(KeyCode.A) && grounded)
         {
             anim.SetFloat("Move", 0.5f);
+            MoveGunDown();
         }
         else if (Input.GetKeyUp(KeyCode.A))
         {
             anim.SetFloat("Move", 0f);
+            arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = new Vector3(origPos.x, origPos.y, origPos.z);
         }
 
         if (Input.GetKey(KeyCode.D) && grounded)
         {
             anim.SetFloat("Move", 0.5f);
+            MoveGunDown();
         }
         else if (Input.GetKeyUp(KeyCode.D))
         {
             anim.SetFloat("Move", 0f);
+            arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = new Vector3(origPos.x, origPos.y, origPos.z);
         }
 
         if (Input.GetKey(KeyCode.S) && grounded)
         {
             anim.SetFloat("Move", 0.5f);
+            MoveGunDown();
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
             anim.SetFloat("Move", 0f);
+            arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = new Vector3(origPos.x, origPos.y, origPos.z);
         }
 
         if (Input.GetKey(KeyCode.W) && grounded)
         {
             anim.SetFloat("Move", 0.5f);
+            MoveGunDown();
         }
         else if (Input.GetKeyUp(KeyCode.W))
         {
             anim.SetFloat("Move", 0f);
+            arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = new Vector3(origPos.x, origPos.y, origPos.z);
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && grounded)
         {
             anim.SetFloat("Move", 1f);
+            MoveGunDown();
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             anim.SetFloat("Move", 0f);
+            arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = new Vector3(origPos.x, origPos.y, origPos.z);
+        }
+
+        if (Input.GetKey(KeyCode.C) && grounded && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+        {
+            MoveGunDownSlide();
+        } else if (Input.GetKeyUp(KeyCode.C))
+        {
+            arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = Vector3.Lerp(arms.transform.GetChild(itemIndex).gameObject.transform.localPosition, new Vector3(origPos.x, origPos.y, origPos.z), 1);
         }
     }
 

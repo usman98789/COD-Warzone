@@ -23,10 +23,14 @@ public class Sliding : MonoBehaviour
 
     private bool isSliding = false;
 
+    [SerializeField] GameObject cameraHolder;
+    private Vector3 cameraPos;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         PV = playerObj.GetComponent<PhotonView>();
+        cameraPos = cameraHolder.transform.localPosition;
     }
 
     private void Update()
@@ -57,6 +61,7 @@ public class Sliding : MonoBehaviour
     private void StartSlide()
     {
         isSliding = true;
+        cameraHolder.transform.localPosition = new Vector3(cameraPos.x, cameraPos.y - 0.65f, cameraPos.z);
         playerObj.GetComponent<Animator>().SetBool("slide", true);
         slideTimer = maxSlideTime;
     }
@@ -64,6 +69,7 @@ public class Sliding : MonoBehaviour
     private void StopSlide()
     {
         isSliding = false;
+        cameraHolder.transform.localPosition = new Vector3(cameraPos.x, cameraPos.y, cameraPos.z);
         playerObj.GetComponent<Animator>().SetBool("slide", false);
     }
 

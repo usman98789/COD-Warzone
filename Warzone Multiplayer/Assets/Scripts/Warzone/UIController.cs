@@ -68,7 +68,7 @@ namespace SpeedTutorBattleRoyaleUI
         {
             ammoStr = a;
             clipSize = c;
-            Debug.Log("UIController UPDATE AMMO: ammoStr " + ammoStr + " CLIP SIZE " + clipSize);
+            //Debug.Log("UIController UPDATE AMMO: ammoStr " + ammoStr + " CLIP SIZE " + clipSize);
             //ammoDisplay.text = a + " / " + c;
         }
 
