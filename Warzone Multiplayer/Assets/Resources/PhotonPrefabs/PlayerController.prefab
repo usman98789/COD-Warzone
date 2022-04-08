@@ -6356,7 +6356,7 @@ MonoBehaviour:
   orientation: {fileID: 5446564172887138666}
   playerObj: {fileID: 5446564172887138666}
   maxSlideTime: 0.6
-  slideForce: 1
+  slideForce: 10
   cameraHolder: {fileID: 2188128416024692672}
 --- !u!1 &2845073933345390043
 GameObject:
@@ -14329,7 +14329,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5596776258442866566}
   - component: {fileID: 3905011428215689662}
-  - component: {fileID: 7617497239774014940}
   m_Layer: 0
   m_Name: ARMS
   m_TagString: Untagged
@@ -14417,25 +14416,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.017404467, y: -0.5829315, z: 0.004514545}
     m_Extent: {x: 0.09396453, y: 1.075931, z: 0.073033795}
   m_DirtyAABB: 0
---- !u!114 &7617497239774014940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6145187973401419330}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f08edac382010741971b11994b348b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gun1: {fileID: 5122937787205371853}
-  gun2: {fileID: 2095703380454721312}
-  gun3: {fileID: 1665342498521839095}
-  gun4: {fileID: 6491562581891878287}
-  gun5: {fileID: 4250969890587367116}
-  gun6: {fileID: 5608687958678823444}
-  PV: {fileID: 6134282174793955275}
 --- !u!1 &6166990101967525943
 GameObject:
   m_ObjectHideFlags: 0
