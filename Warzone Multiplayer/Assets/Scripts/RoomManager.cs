@@ -30,7 +30,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnDisable();
         SceneManager.sceneLoaded -= OnSceneLoaded;
-
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
@@ -41,13 +40,4 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

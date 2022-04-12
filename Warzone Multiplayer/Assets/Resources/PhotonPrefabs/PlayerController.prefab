@@ -6158,7 +6158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 2188128416024692672}
   mouseSensitivity: 3
-  sprintSpeed: 6
+  sprintSpeed: 7
   walkSpeed: 3.5
   jumpForce: 200
   smoothTime: 0.2
@@ -6355,8 +6355,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 5446564172887138666}
   playerObj: {fileID: 5446564172887138666}
-  maxSlideTime: 0.6
-  slideForce: 10
+  maxSlideTime: 0.8
+  slideForce: 11
   cameraHolder: {fileID: 2188128416024692672}
 --- !u!1 &2845073933345390043
 GameObject:
@@ -7590,6 +7590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7fc4decfd51434e8f621a656bb5179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PV: {fileID: 6134282174793955275}
 --- !u!1 &3586708126726839310
 GameObject:
   m_ObjectHideFlags: 0
@@ -10462,14 +10463,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameColour: {r: 1, g: 0.5082709, b: 0, a: 1}
-  playerCash: 2000
+  playerCash: 0
   currentHealthValue: 100
   maximumHealthBars: 100
   maxHealthTimer: 3
   regenHealth: 0
   inDamageArea: 0
   currentArmourValue: 300
-  playerArmourAmount: 3
+  playerArmourAmount: 0
   maxArmourTimer: 1
   equipArmourKey: 102
   nameUI: {fileID: 399399249233437442}

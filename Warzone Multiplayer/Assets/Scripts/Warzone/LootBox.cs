@@ -26,7 +26,11 @@ public class LootBox : MonoBehaviour
             {
                 FindObjectOfType<AudioManager>().Play("ChestOpen");
                 PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Cash_Pickup"), new Vector3(lootBoxPos.x + Random.Range(1f,2.5f), lootBoxPos.y, lootBoxPos.z + Random.Range(8.5f, 9.5f)), Quaternion.identity);
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ArmourPlate_Pickup"), new Vector3(lootBoxPos.x + Random.Range(0.5f, 1.5f), lootBoxPos.y + 0.4f, lootBoxPos.z + Random.Range(0.5f, 1f)), Quaternion.identity);
+                var i = Random.Range(0, 100);
+                if (i < 10)
+                {
+                    PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ArmourPlate_Pickup"), new Vector3(lootBoxPos.x + Random.Range(0.5f, 1.5f), lootBoxPos.y + 0.4f, lootBoxPos.z + Random.Range(0.5f, 1f)), Quaternion.identity);
+                }
                 PV.RPC("RPC_HasOpened", RpcTarget.All);
             }
         }

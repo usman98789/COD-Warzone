@@ -1,0 +1,406 @@
+# Blender MTL File: 'Farm Pack.blend'
+# Material Count: 37
+
+newmtl Barn
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.475116 0.475116 0.475116
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd G:\Grafik-Bereich\Konzepte und Prototypen\Konzept - Farm Package\Verkauf\Assets\Textures\Barn Building.png
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Barn Building_nm.png
+
+newmtl Barn_NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.475116 0.475116 0.475116
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Barn Building_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Barn Building.png
+
+newmtl Barrel
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Barrel_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Barrel.png
+
+newmtl Bottle
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bottle_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bottle.png
+
+newmtl Brick
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Brick.png
+
+newmtl Brunnen
+Ns 488.235294
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Fountain_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Fountain.png
+
+newmtl Bucket
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bucket_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bucket.png
+
+newmtl Cart
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Cart_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Cart.png
+
+newmtl Chair
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Chair_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Chair.png
+
+newmtl Crate
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Crate_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Crate.png
+
+newmtl Fences
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Fences_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Fences.png
+
+newmtl Fork
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Fork.png
+
+newmtl Futternapf
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bowl_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bowl.png
+
+newmtl Hay_1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hay 1.png
+map_d G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hay 1.png
+
+newmtl Hay_2
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hay 2.png
+map_d G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hay 2.png
+
+newmtl Haybale
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\hay bale_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\hay bale.png
+
+newmtl Hoe
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hoe_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hoe.png
+
+newmtl Holzrad
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Wheel_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Wheel.png
+
+newmtl Hut
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hut_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Hut.png
+
+newmtl Kürbis
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Pumpkin_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Pumpkin.png
+
+newmtl Ladder
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Ladder.png
+
+newmtl Material.002
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Rails_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Rails.png
+
+newmtl Material.004
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Waggon_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Waggon.png
+
+newmtl Mill
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Mill_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Mill.png
+
+newmtl Pallet
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Pallet_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Pallet.png
+
+newmtl Rake
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Rake_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Rake.png
+
+newmtl Shovel
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Shovel_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Shovel.png
+
+newmtl Small_Ladder
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\small Ladder_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\small Ladder.png
+
+newmtl Watertower
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Watertower_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Watertower.png
+
+newmtl Woodpile
+Ns 488.235294
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Woodpile_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Woodpile.png
+
+newmtl big_cart
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Big Cart_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Big Cart.png
+
+newmtl bucket_small_flat
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bucket small flat_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Bucket small flat.png
+
+newmtl bucket_small_high
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\bucket small high_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\bucket small high.png
+
+newmtl round_stool
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\stool round_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\stool round.png
+
+newmtl watering_can
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Watertower_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\watering can.png
+
+newmtl wood_pile
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\wood pile_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\wood pile.png
+
+newmtl wood_stack_
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.050000 0.050000 0.050000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Wood Stack_nm.png
+map_Kd G:\\Grafik-Bereich\\Konzepte und Prototypen\\Konzept - Farm Package\\Verkauf\\Assets\\Textures\\Wood Stack.png

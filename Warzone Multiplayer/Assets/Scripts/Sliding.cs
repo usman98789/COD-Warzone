@@ -25,12 +25,15 @@ public class Sliding : MonoBehaviour
 
     [SerializeField] GameObject cameraHolder;
     private Vector3 cameraPos;
+    private float distToGround;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         PV = playerObj.GetComponent<PhotonView>();
         cameraPos = cameraHolder.transform.localPosition;
+        distToGround = playerObj.GetComponent<Collider>().bounds.extents.y;
     }
 
     private void Update()
@@ -40,7 +43,7 @@ public class Sliding : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
+        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && !IsGrounded() && !isSliding)
         {
             StartSlide();
         }
@@ -51,7 +54,11 @@ public class Sliding : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    bool IsGrounded() {
+        return Physics.Raycast(transform.position, -Vector3.up, (float)(distToGround + 0.1));
+    }
+
+private void FixedUpdate()
     {
         if (!PV.IsMine) return;
         if (isSliding)

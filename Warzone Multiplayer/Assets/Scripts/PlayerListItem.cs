@@ -17,7 +17,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        if (player == otherPlayer)
+        if (gameObject != null && player == otherPlayer)
         {
             Destroy(gameObject);
         }
@@ -25,6 +25,9 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        Destroy(gameObject);
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }

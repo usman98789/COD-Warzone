@@ -20,7 +20,7 @@ public class buyPopup : MonoBehaviour
     {
         if (collision.gameObject.tag.Contains("Player"))
         {
-            collision.gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            collision.gameObject.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
@@ -28,7 +28,7 @@ public class buyPopup : MonoBehaviour
     {
         if (collision.gameObject.tag.Contains("Player") && Input.GetKeyDown(KeyCode.E))
         {
-            collision.gameObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            collision.gameObject.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.SetActive(true);
             UIController.instance.UpdateArmourAmount(2, true);
         }
     }

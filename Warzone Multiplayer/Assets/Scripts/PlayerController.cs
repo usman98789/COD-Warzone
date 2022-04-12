@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     private float elapsedTime;
 
+    bool isSliding;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -95,9 +97,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
 
         allObjects = new GameObject[] { smg, pistol, shotgun, sniper, ar, mac };
-        curr = allObjects[0];
         if (PV.IsMine)
         {
+            curr = allObjects[0];
             curr.transform.parent.transform.parent.transform.GetComponent<SingleShotGun>().UpdateAmmo();
         }
 
@@ -381,11 +383,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = new Vector3(origPos.x, origPos.y, origPos.z);
         }
 
-        if (Input.GetKey(KeyCode.C) && grounded && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+        if (Input.GetKey(KeyCode.C) && grounded && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && !isSliding)
         {
+            isSliding = true;
             MoveGunDownSlide();
         } else if (Input.GetKeyUp(KeyCode.C))
         {
+            isSliding = false;
             arms.transform.GetChild(itemIndex).gameObject.transform.localPosition = Vector3.Lerp(arms.transform.GetChild(itemIndex).gameObject.transform.localPosition, new Vector3(origPos.x, origPos.y, origPos.z), 1);
         }
     }

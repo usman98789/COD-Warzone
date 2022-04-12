@@ -189,7 +189,10 @@ namespace SpeedTutorBattleRoyaleUI
             nameUI.color = nameColour;
             cashUI.text = playerCash.ToString("0");
             armourAmount.text = playerArmourAmount.ToString("0");
-            ammoDisplay.text = ammoStr + " / " + clipSize;
+            if (PV.IsMine)
+            {
+                ammoDisplay.text = ammoStr + " / " + clipSize;
+            }
             //Debug.Log("UIController UPDATEUI: ammoStr " + ammoStr + " CLIP SIZE " + clipSize);
 
             if (currentHealthValue >= 1)
